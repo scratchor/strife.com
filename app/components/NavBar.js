@@ -12,7 +12,7 @@ import {
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  .mr-auto > .nav-link.active {
+  .ml-auto > .nav-link.active {
     color: white;
   }
 
