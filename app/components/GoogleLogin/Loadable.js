@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for Google-Login
+ * Asynchronously loads the component for GoogleLogin
  *
  */
 

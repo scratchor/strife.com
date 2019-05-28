@@ -14,16 +14,17 @@ import { compose } from 'redux';
 
 import { useInjectSaga } from 'utils/injectSaga';
 import { useInjectReducer } from 'utils/injectReducer';
+
 import makeSelectLogin from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import messages from './messages';
-import Google from '../../components/Google-Login/index';
+import Google from '../../components/GoogleLogin/index';
 import VkLogin from '../../components/VkLogin/index';
 import FacebookLogin from '../../components/FacebookLogin/index';
+import LinkedinLogin from '../../components/LinkedinLogin/index';
 import auth from '../../auth';
-import { logintAction } from './actions';
-import { logoutAction } from './actions';
+import { logintAction, logoutAction } from './actions';
 
 export function Login({ login, history, OnlogintAction, OnlogoutAction }) {
   const responseGoogle = response => {
@@ -51,8 +52,8 @@ export function Login({ login, history, OnlogintAction, OnlogoutAction }) {
   };
 
   const responseFacebook = response => {
-    console.log(response);
-    history.push('/');
+    console.log('привет');
+    /*history.push('/');*/
   };
 
   const logout = () => {
@@ -77,6 +78,7 @@ export function Login({ login, history, OnlogintAction, OnlogoutAction }) {
         <meta name="description" content="Description of Login" />
       </Helmet>
       <FormattedMessage {...messages.header} />
+      <LinkedinLogin />
       <Google
         responseGoogle={responseGoogle}
         logout={logout}
@@ -85,6 +87,7 @@ export function Login({ login, history, OnlogintAction, OnlogoutAction }) {
         picture={picture}
       />
       <VkLogin responseVk={responseVk} history={history} />
+
       <FacebookLogin responseFacebook={responseFacebook} />
     </div>
   );

@@ -19,7 +19,7 @@ function Vk({ responseVk, history }) {
   const get = () => {
     // eslint-disable-next-line no-restricted-globals
     location.replace(
-      'https://oauth.vk.com/authorize?client_id=6994645&redirect_uri=http://localhost:80/login&display=page&scope=email&response_type=token&v=5.95&revoke=1',
+      'https://oauth.vk.com/authorize?client_id=6994645&redirect_uri=http://localhost:80/login&display=popup&scope=email&response_type=token&v=5.95&revoke=1',
     );
   };
   const getUserInfo = () => {

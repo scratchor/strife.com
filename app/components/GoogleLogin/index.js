@@ -1,6 +1,6 @@
 /**
  *
- * Google-Login
+ * GoogleLogin
  *
  */
 
