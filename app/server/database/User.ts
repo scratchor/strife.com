@@ -1,22 +1,33 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import {
+  Model,
+  Column,
+  Table,
+  CreatedAt,
+  UpdatedAt,
+  DeletedAt,
+  DataType,
+} from 'sequelize-typescript';
 
-const sequelize = require('sequelize');
-import db from './db';
+@Table
+export class User extends Model<User> {
+  @Column(DataType.STRING)
+  firstName: string;
 
-const User = sequelize.define(
-  'user',
-  {
-    // attributes
-    firstName: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    lastName: {
-      type: Sequelize.STRING,
-      // allowNull defaults to true
-    },
-  },
-  {
-    // options
-  },
-);
+  @Column(DataType.STRING)
+  lastName: string;
+
+  @Column(DataType.STRING)
+  email: string;
+
+  @CreatedAt
+  @Column(DataType.DATE)
+  createdAt: Date;
+
+  @UpdatedAt
+  @Column(DataType.DATE)
+  UpdatedAt: Date;
+
+  @DeletedAt
+  @Column(DataType.DATE)
+  deletionDate: Date;
+}

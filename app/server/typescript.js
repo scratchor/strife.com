@@ -1,3 +1,3 @@
 "use strict";
-var myString = 'hello';
-var myNum = 1;
+const myString = 'hello';
+const myNum = 1;
