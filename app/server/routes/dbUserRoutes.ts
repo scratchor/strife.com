@@ -1,17 +1,13 @@
 import express from 'express';
-import { User } from '../database/User';
+import { User } from '../database/models/User';
 
 const router = express.Router();
 
 router.get('/', (req: express.Request, res: express.Response) => {
-  /*  User.sync({ force: true }).then(() =>
-    User.findAll()
-      .then((users: any) => {
-        console.log(users);
-        res.sendStatus(200);
-      })
-      .catch((err: any) => console.log(err)),
-  );*/
+  type Type = {
+    id: number;
+    name: string;
+  };
 
   User.findAll()
     .then((users: any) => {

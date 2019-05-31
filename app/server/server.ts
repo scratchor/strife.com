@@ -14,6 +14,7 @@ app.get('/', (req: express.Request, res: express.Response) =>
 );
 
 app.use('/users', require('./routes/dbUserRoutes'));
+app.use('/users', require('./routes/dbFriendRoutes'));
 
 db.authenticate()
   .then(() => {

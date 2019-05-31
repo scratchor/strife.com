@@ -10,6 +10,7 @@ const app = express_1.default();
 const PORT = process.env.PORT || 3000;
 app.get('/', (req, res) => res.send('Hello World!'));
 app.use('/users', require('./routes/dbUserRoutes'));
+app.use('/users', require('./routes/dbFriendRoutes'));
 db_1.default.authenticate()
     .then(() => {
     console.log('Connection has been established successfully.');

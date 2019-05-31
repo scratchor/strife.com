@@ -6,17 +6,9 @@ var __importDefault =
   };
 Object.defineProperty(exports, '__esModule', { value: true });
 const express_1 = __importDefault(require('express'));
-const User_1 = require('../database/User');
+const User_1 = require('../database/models/User');
 const router = express_1.default.Router();
 router.get('/', (req, res) => {
-  /*  User.sync({ force: true }).then(() =>
-      User.findAll()
-        .then((users: any) => {
-          console.log(users);
-          res.sendStatus(200);
-        })
-        .catch((err: any) => console.log(err)),
-    );*/
   User_1.User.findAll()
     .then(users => {
       console.log(users);

@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from './User';
+import { User } from './models/User';
 const path = require('path');
 
 const db = new Sequelize('strife', 'postgres', 'scratchor', {
   host: 'localhost',
   dialect: 'postgres',
-  // models: [`${path.dirname}/app/server/database/User.ts`],
+  models: [`${__dirname}/models`],
 
   pool: {
     max: 5,
@@ -15,8 +15,8 @@ const db = new Sequelize('strife', 'postgres', 'scratchor', {
   },
 });
 
-db.addModels([User]);
+//db.addModels([User]);
 
-db.sync({ force: true });
+db.sync({ force: true }).then(() => console.log('Synchronization complete!'));
 
 export default db;
