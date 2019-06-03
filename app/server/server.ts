@@ -1,13 +1,13 @@
 import express from 'express';
-import sequelize from 'sequelize';
-import { Sequelize } from 'sequelize-typescript';
-import { any } from 'prop-types';
+import { Logger } from '@overnightjs/logger';
 
 // database
-import db from './database/db';
+import { sequelize } from './database/db';
+
+const logger = new Logger();
 
 const app = express();
-const PORT: any = process.env.PORT || 3000;
+const PORT: any = process.env.PORT || 5000;
 
 app.get('/', (req: express.Request, res: express.Response) =>
   res.send('Hello World!'),
@@ -16,12 +16,13 @@ app.get('/', (req: express.Request, res: express.Response) =>
 app.use('/users', require('./routes/dbUserRoutes'));
 app.use('/users', require('./routes/dbFriendRoutes'));
 
-db.authenticate()
+sequelize
+  .authenticate()
   .then(() => {
-    console.log('Connection has been established successfully.');
+    logger.info('Connection has been established successfully.');
   })
   .catch((err: any) => {
-    console.error('Unable to connect to the database:', err);
+    logger.warn('Unable to connect to the database:', err);
   });
 
 app.listen(PORT, () => {

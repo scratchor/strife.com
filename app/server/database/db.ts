@@ -1,11 +1,11 @@
 import { Sequelize } from 'sequelize-typescript';
-import { User } from './models/User';
-const path = require('path');
+import { Logger } from '@overnightjs/logger';
+import User from './models/User';
+const logger = new Logger();
 
-const db = new Sequelize('strife', 'postgres', 'scratchor', {
+export const sequelize = new Sequelize('strife', 'postgres', 'scratchor', {
   host: 'localhost',
   dialect: 'postgres',
-  models: [`${__dirname}/models`],
 
   pool: {
     max: 5,
@@ -13,10 +13,27 @@ const db = new Sequelize('strife', 'postgres', 'scratchor', {
     acquire: 30000,
     idle: 10000,
   },
+
+  logging: console.log, // TODO change console.log to Logger
+  define: {
+    charset: 'utf8',
+    freezeTableName: true,
+    underscored: true,
+  },
 });
 
-//db.addModels([User]);
+const models = {
+  User: User(sequelize),
+};
 
-db.sync({ force: true }).then(() => console.log('Synchronization complete!'));
+sequelize
+  .sync({ force: false })
+  .then(async () => {
+    logger.info('DB successfully synchronized with models');
+  })
+  .catch((err: Error) => {
+    logger.err(err);
+    throw err;
+  });
 
-export default db;
+export default models;

@@ -1,43 +1,20 @@
-import {
-  Model,
-  Column,
-  Table,
-  CreatedAt,
-  UpdatedAt,
-  DeletedAt,
-  DataType,
-  PrimaryKey,
-  AutoIncrement,
-  BelongsToMany,
-} from 'sequelize-typescript';
-import { Friend } from './Friend';
+import { DataTypes, Model, BuildOptions, Sequelize } from 'sequelize';
 
-@Table
-export class User extends Model<User> {
-  @BelongsToMany(() => User, () => Friend, 'userId')
-  @PrimaryKey
-  @AutoIncrement
-  @Column(DataType.INTEGER)
-  id: number;
-
-  @Column(DataType.STRING)
-  firstName: string;
-
-  @Column(DataType.STRING)
-  lastName: string;
-
-  @Column(DataType.STRING)
-  email: string;
-
-  @CreatedAt
-  @Column(DataType.DATE)
-  createdAt: Date;
-
-  @UpdatedAt
-  @Column(DataType.DATE)
-  UpdatedAt: Date;
-
-  @DeletedAt
-  @Column(DataType.DATE)
-  deletionDate: Date;
+interface MyModel extends Model {
+  readonly id: number;
 }
+
+// Need to declare the static model so `findOne` etc. use correct types.
+type MyModelStatic = typeof Model & {
+  new (values?: object, options?: BuildOptions): MyModel;
+};
+
+// TS can't derive a proper class definition from a `.define` call, therefor we need to cast here.
+export default (sequelize: Sequelize) => {
+  return <MyModelStatic>sequelize.define('User', {
+    id: {
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+    },
+  });
+};
