@@ -52,8 +52,8 @@ export function Login({ login, history, OnlogintAction, OnlogoutAction }) {
   };
 
   const responseFacebook = response => {
-    console.log('привет');
-    /*history.push('/');*/
+    console.log(response);
+    //history.push('/');
   };
 
   const logout = () => {
